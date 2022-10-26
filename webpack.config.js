@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin= require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 module.exports ={
     mode:"development",
@@ -16,6 +17,28 @@ module.exports ={
                     loader: 'babel-loader',
                     options: { presets: ['@babel/preset-env'] }
                 },
+            },
+            {
+                test: /\.css | .scss$/,
+                use:[
+                    (process.env.NODE === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader),
+                    {
+                        loader:'css-loader',
+                        options:{
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader:'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                              // 添加 autoprefixer 插件
+                                plugins: [require("autoprefixer")],
+                            },
+                        },
+                    },
+                    'sass-loader'
+                ]
             }
         ]
     },
@@ -29,6 +52,7 @@ module.exports ={
             template:path.join(__dirname,'./src/index.html'),
             filename:'index.html',
         }),
+        new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ]
 }
