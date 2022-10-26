@@ -16,6 +16,12 @@ class RoundItem {
             this.content.closePath();
             this.content.fill();
         }
+        this.move = function() {
+            this.y = 0.15
+            // if(this.y<=-10) {
+            //     this.y = 
+            // }
+        }
     }
     //写在constructor外面的函数会挂载到原型上，不同实力对象调用该方法都是调用一个
     // draw(content) {
