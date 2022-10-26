@@ -19,7 +19,7 @@ module.exports ={
                 },
             },
             {
-                test: /\.css | .scss$/,
+                test: /\.css$/,
                 use:[
                     (process.env.NODE === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader),
                     {
@@ -28,16 +28,16 @@ module.exports ={
                             importLoaders: 1
                         }
                     },
-                    {
-                        loader:'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                              // 添加 autoprefixer 插件
-                                plugins: [require("autoprefixer")],
-                            },
-                        },
-                    },
-                    'sass-loader'
+                    // {
+                    //     loader:'post-loader',
+                    //     options: {
+                    //         postcssOptions: {
+                    //           // 添加 autoprefixer 插件
+                    //             plugins: [require("autoprefixer")],
+                    //         },
+                    //     },
+                    // },
+                    // 'sass-loader'
                 ]
             }
         ]
